@@ -1,0 +1,27 @@
+1、pm2是什么？
+pm2是一个进程管理工具,可以用它来管理你的node进程，并查看node进程的状态，当然也支持性能监控，进程守护，负载均衡等功能。
+
+2、pm2的安装与使用
+npm instal -g pm2
+
+3、启动进程
+pm2 start app.js
+或者
+pm2 start bin/www
+
+4、进程重命名
+pm2 start 旧名称 --name 新名称 
+eg: pm2 start  www --name mall
+
+5、添加进程监视（watch）
+pm2 start 进程名称 --watch
+eg: pm2 start mall --watch
+
+6、停止监视（watch）
+pm2 stop 进程名称 --watch
+eg: pm2 stop mall --watch
+
+7、结束进程
+pm2 stop 进程名称
+eg:pm2 stop mall
+

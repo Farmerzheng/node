@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="comment">
+  <button id="btn">获取数据</button>
+  <script>
+
+  let btn = document.querySelector("#btn");
+  let comment = document.querySelector("#comment");
+
+  btn.addEventListener("click", requestData);
+ 
+  // 发送数据给服务器
+  function requestData() {
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("get", "http://127.0.0.1:8081/process_get?comment=" + comment.value);
+   
+    xhr.onreadystatechange = function() {
+      if (xhr.status === 200 && xhr.readyState === 4) {
+        // 服务器响应的数据
+        console.log(xhr.responseText);
+      }
+    } 
+    xhr.send();
+
+  }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "demo-12-uploadimage",
+  "version": "1.0.0",
+  "description": "安装外部Node.js模块，以及将它们应用到我们的应用中",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^1.1.1"
+  }
+}

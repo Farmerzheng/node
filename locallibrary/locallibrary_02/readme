@@ -1,0 +1,15 @@
+1、express locallibrary_02 --view=pug
+cd locallibrary_02
+npm install
+npm install --save-dev nodemon
+npm run devstart
+
+2、修改package.json 
+   "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www"
+  },
+
+3、打开http://localhost:3000/或者http://localhost:3000/users
+
+4、Create a new route in /routes/users.js that will display the text "You're so cool" at URL /users/cool/. Test it by running the server and visiting http://localhost:3000/users/cool/ in your browser

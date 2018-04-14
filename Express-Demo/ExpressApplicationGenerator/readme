@@ -1,0 +1,11 @@
+1、npm install express-generator -g
+2、express --help
+3、执行 express express-application命令
+4、   change directory:
+     > cd express
+
+   install dependencies:
+     > npm install
+
+   run the app:
+     > npm start

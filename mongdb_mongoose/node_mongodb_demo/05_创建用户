@@ -1,0 +1,131 @@
+
+MongoDB数据库在默认是没有用户名及密码，不用安全验证的，只要连接上服务就可以进行CRUD操作。
+
+带有-auth参数时，必须通过认证才可以查询数据。
+如果没有加-auth参数，即使配置了安全认证用户，也不需要认证谁都可以操作。
+
+
+   1、show dbs 显示所有的数据库
+
+        admin    0.000GB
+		demo     0.000GB
+		demo_02  0.000GB
+		local    0.000GB
+		my_db    0.000GB
+		test     0.000GB
+
+   2、
+        use admin，你会发现该DB下包含了一个system.user表
+        这个表就等同于MsSql中的用户表，用来存放超级管理员的，
+        那我们就往它里面添加一个超级管理员吧
+
+		> use admin
+		switched to db admin
+		> show collections
+		system.users
+
+   3、添加一个超级管理员用户
+
+     db.createUser({user:"zhangsan",pwd:"123456",roles:["root"]})
+     username为zhangsan
+     password为123456
+
+     roles：指定用户的角色，可以用一个空数组给新用户设定空角色
+     在roles字段,可以指定内置角色和用户定义的角色
+
+     role里的角色可以选：
+        1. 数据库用户角色：read、readWrite;
+	    2. 数据库管理角色：dbAdmin、dbOwner、userAdmin；
+	    3. 集群管理角色：clusterAdmin、clusterManager、clusterMonitor、hostManager；
+	    4. 备份恢复角色：backup、restore；
+	    5. 所有数据库角色：readAnyDatabase、readWriteAnyDatabase、
+	                    userAdminAnyDatabase、dbAdminAnyDatabase
+	    6. 超级用户角色：root  
+
+     具体角色： 
+	    read：允许用户读取指定数据库
+		readWrite：允许用户读写指定数据库
+		dbAdmin：允许用户在指定数据库中执行管理函数，如索引创建、删除，查看统计或访问system.profile
+		userAdmin：允许用户向system.users集合写入，可以找指定数据库里创建、删除和管理用户
+		clusterAdmin：只在admin数据库中可用，赋予用户所有分片和复制集相关函数的管理权限。
+		readAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的读权限
+		readWriteAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的读写权限
+		userAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的userAdmin权限
+		dbAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的dbAdmin权限。
+		root：只在admin数据库中可用。超级账号，超级权限
+
+   
+   4、再次启动数据库（以授权的方式启动）
+
+	   我们在启动MongoDB时，需要加上-auth参数，这样我们设置的权限才能生效
+	   mongod  --config  "C:\Program Files\MongoDB\Server\3.2\mongodb.cfg" --auth
+
+   5、
+      mongo---->use admin----->show collections--->报错（我们发现无法查看该库下的表了）
+
+   6、使用设置的用户名、密码来访问（超级管理员授权） 
+
+     在admin数据库下（帐号是跟着库走的，所以在指定库里授权，必须也在指定库里验证(auth)）
+     db.auth("zhangsan","123456")
+     输出结果值为1，说明这个用户匹配上了，
+     如果用户名、密码不对，会输入0
+
+     这时再输入show collections 你会看到结果了！
+
+   7、  
+      我们是先进入admin库，再转到其它库来的，admin相当于是一个最高级别官员所在区域，如果你是个地产商，想在地方弄个大工程做做，你想不经过那些高级官员就做，这是行不通的，你需要先去到他们那里，送点礼，再顺着下到地方，工程你就可以拿到手了；即然工程拿到手了，就要开始建了，那我们不至于每加块砖、添个瓦都得去和那帮高级官员打招呼吧
+
+   8、每个数据库的用户账号都是以文档形式存储在system.users集合里面的
+      查询某个数据库下的用户 ： db.system.users.find() 
+      删除指定用户db.system.users.remove({'user':'用户名'})
+
+   9、 在test库里创建帐号  
+
+        只读账号
+        > use test       
+		switched to db test
+		> db.createUser(
+		     {
+		       user: "lisi",
+		       pwd: "123",
+		       roles: [
+		          { role: "read", db: "test" }  
+		       ]
+		     }
+		 )  
+
+        读写帐号
+		db.createUser(
+		     {
+		       user: "zjy",
+		       pwd: "zjy",
+		       roles: [
+		          { role: "readWrite", db: "test" }  
+		       ]
+		     }
+		 )
+       
+       重新以授权方式启动数据库：
+       mongod  --config  "C:\Program Files\MongoDB\Server\3.2\mongodb.cfg"	
+
+       use test--->show collections---->报错
+
+       use test ----> db.auth("lisi","123")---->show collections ---->集合出现了！
+
+       查看当前数据库下用户： show users (前提是由root权限)
+
+
+
+
+
+
+
+
+现在我们为mongodb的admin数据库添加一个用户root，密码也是root，mongodb可以为每个数据库都建立权限认证，也就是你可以指定某个用户可以登录到哪个数据库。上面的代码，我们为admin数据库添加了一个root用户，在mongodb中admin数据库是一个特别的数据库，这个数据库的用户，可以访问mongodb中的所有数据库。
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+项目详见 node_mongodb_demo
+
+1、创建项目文件夹 node_mongodb_demo
+
+2、来到node_mongodb_demo 文件夹下初始化项目: npm init
+
+3、安装mongoDB node.js驱动程序 ： npm install mongodb
+
+  MongoDB Node.js驱动程序是被官方所支持的原生Node.js驱动程序，
+  他是至今为止最好的实现,并且得到了MongoDB官方的支持。
+  MongoDB团队已经采用MongoDB Node.js驱动程序作为标准方法。
+
+4、在 node_mongodb_demo 文件夹下创建 app_01.js、app_02.js、app_03.js……文件
+
+5、运行创建的js文件 : node app_01.js、app_02.js、app_03.js……

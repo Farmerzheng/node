@@ -1,0 +1,26 @@
+sublime 中如何运行 node 程序
+
+1、首先安装nodejs
+首先确保你的电脑已经安装好nodejs, 并已将其添加到环境变量中 (一般安装时自动添加或者询问是否添加)
+
+2、添加build system
+
+在sublime text中依次打开Tools -> Build System -> New Build System
+
+粘贴以下代码后保存(如Node.sublime-build)
+
+{ "cmd": ["node", "–use-strict", "–harmony", "$file"], "selector": "source.js"}
+
+然后 :Tools-->Build System-->Automatic 
+
+
+
+3、测试
+
+随便一行代码测试是否安装成功。
+
+for (let i = 0; i < 3; i++) {
+    console.log('i:', i);
+}
+
+快捷键ctrl+b 运行 

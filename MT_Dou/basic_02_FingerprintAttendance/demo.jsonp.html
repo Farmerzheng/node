@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  function JSONP(src) {
+    var oScript = document.createElement("script");
+    oScript.src = src || "";
+    document.body.append(oScript);
+  }
+  JSONP("http://192.168.31.77:888/");
+
+
+  function callback(ret) {
+    console.log(ret);
+    let str = "";
+    ret.forEach(function(item) {
+      str += "<tr><td>" + item.name + "</td><td>" + item.num + "</td></tr>";
+    });
+    console.log(str)
+    document.body.innerHTML ="<table>"+str+"</table>"
+}
+  </script>
+</body>
+
+</html>

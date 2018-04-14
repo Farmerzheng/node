@@ -1,0 +1,111 @@
+6、MongoDB基本语法
+
+    在 C:\Program Files\MongoDB\Server\3.2\bin>目录下运行命令 ： mongo
+
+    （ 执行 mongo，进入 mongodb 命令行模式 ）
+
+    然后输入命令 ：
+    查看数据库:show dbs 
+    新建数据库：use 新建数据库名
+    新建表：db.createCollection('要新建的表名')
+    查看当前数据库下表： show collections
+    删除当前数据库指定表：db.表名.drop()
+　　 删除当前数据库：db.dropDatabase()
+
+  一、插入数据
+		     方法一、
+		        > use my_db
+				switched to db my_db
+				> db.tb1.insert({"name":"zhangsan","age":18})
+				WriteResult({ "nInserted" : 1 })
+				> db.tb1.find()
+				{ "_id" : ObjectId("5acb8bad08b51b6cc9bdb3bb"), "name" : "zhangsan", "age" : 18 }
+
+			    1.可以看出，没有去创建“tb1”表，其实通过插入操作也会自动创建
+
+		　　    2._id，是mongodb自已生成的，每行数据都会存在，默认是ObjectId，可以在插入数据时插入这个键的值(支持mongodb支持的所有数据类型)　
+		    方法二、
+			    > db.tb1.save({"_id":1,"name":"lisi","age":18})
+			     WriteResult({ "nMatched" : 0, "nUpserted" : 1, "nModified" : 0, "_id" : 1 })
+			    > db.tb1.find()
+			     { "_id" : ObjectId("5acb8bad08b51b6cc9bdb3bb"), "name" : "zhangsan", "age" : 18 }
+			     { "_id" : 1, "name" : "lisi", "age" : 18 }
+
+			    1.可以看出，save也可达到insert一样的插入效果
+
+		　　    2._id可以自已插入
+
+		　　    3.一个表中不一定要字段都相同
+
+		    两种方法的区别：
+		       虽然insert和save方法都可以插入数据，当默认的“_id”值已存在时，调用insert方法插入会报错；而save方法不会,会更新相同的_id所在行数据的信息
+ 
+ 二、查询数据		    
+ 
+    查询表中所有数据：db.表名.find();
+
+　　按条件查询（支持多条件）：db.表名.find(条件);（db.tb1.find({"name":"zhangsan"})） 
+
+　　查询第一条（支持条件）：db.表名.findOne(条件);
+
+　　限制数量：db.表名.find().limit(数量);
+
+　　跳过指定数量：db.表名.find().skip(数量);   
+
+	
+	比较查询
+
+　　大于：$gt ---->（db.tb1.find({"age":{"$gt":7}})）
+
+　　小于：$lt
+
+　　大于等于：$gte
+
+　　小于等于：$lte
+
+　　非等于：$ne	  
+   
+    包含、不包含查询
+
+　　 $in ----> （db.tb1.find({"age":{"$in":[18,13]}})）
+　　 $nin  
+    
+   查询数量：db.表名.find().count();
+
+　　排序：db.表名.find().sort({"字段名":1}) ---->（db.tb1.find().sort({"age":-1})）
+
+　　　　　1：表示升序   -1：表示降序
+
+　　指定字段返回： db.表名.find({},{"字段名":0}) ---->（db.tb1.find({"_id":1})）
+
+　　　　　1：返回  0：不返回
+
+三、修改数据
+
+    db.表名.update({"条件字段名":"字段值"},{$set:{"要修改的字段名":"修改后的字段值"}})
+
+    eg : db.tb1.update({"name":"zhangsan"},{$set:{"age":300}})
+
+四、删除数据
+    
+    db.表名.remove(条件) --->  db.tb1.remove({"name":"lisi"})
+
+五、存储过程
+   
+    存储过程（Stored Procedure）是在大型数据库系统中，一组为了完成特定功能的SQL 语句集，存储在数据库中，经过第一次编译后再次调用不需要再次编译，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它
+
+		创建存储过程：
+
+		db.system.js.save({_id:"存储过程ID", 
+		value:function(参数){  
+		        -- 逻辑主体; 
+		        return 返回; 
+		}}); 
+
+		------->
+
+	    db.system.js.save({"_id":"get_tb1_count",value:function(){return db.tb1.find().count();}})
+
+		调用存储过程
+
+		db.eval("存储过程ID()");（is deprecated）

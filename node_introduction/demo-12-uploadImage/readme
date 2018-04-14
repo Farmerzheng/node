@@ -1,0 +1,10 @@
+安装外部Node.js模块，以及将它们应用到我们的应用中
+
+外部模块是Felix Geisendörfer开发的node-formidable模块。它对解析上传的文件数据做了很好的抽象。 其实说白了，处理文件上传就是处理POST数据 —— 但是，麻烦的是在具体的处理细节，所以，这里采用现成的方案更合适点。
+
+npm install formidable
+
+使用外部模块与内部模块类似，用require语句将其引入即可：
+var formidable = require("formidable");
+
+

@@ -1,0 +1,136 @@
+一、使用 Express Generator
+Express Application Generator 能够快速创建一个Express应用框架。
+
+npm install express-generator -g
+express myapp --view=pug
+cd myapp
+npm install
+
+# Run the myapp on Windows
+npm run start
+
+去http://localhost:3000/ 看看刚才创建的Express应用长什么样。
+
+二、添加nodemon
+在开发的时候，每次修改文件，都需要重启 express 服务，比较麻烦。使用nodemon，修改文件后可以自动重启 express 服务。
+
+npm install --save-dev nodemon
+修改 package.json 的 scripts 内容：
+
+"scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www"
+  }
+之后，使用npm run devstart 启动 express 服务。这样在开发过程中修改文件的时候，express服务就会自动重启，非常方便。
+
+三、生成的文档目录结构
+/myapp
+    app.js
+    /bin
+        www
+    package.json
+    /node_modules
+        [about 4,500 subdirectories and files]
+    /public
+        /images
+        /javascripts
+        /stylesheets
+            style.css
+    /routes
+        index.js
+        users.js
+    /views
+        error.pug
+        index.pug
+        layout.pug
+
+四、文档中各文件的含义        
+
+www file
+/bin/www 是应用的主入口。应用的真正入口是app.js文件，所以www文件先把app.js文件引进来，其余的内容主要就是创建了一个node HTTP server。
+
+app.js
+这个可是主要文件，得好好唠唠，在app.js里面，主要做了这些事儿：
+
+1.引入之前使用npm install下载的包，并创建express对象：
+
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var app = express();
+2.使用上面引入的包：
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+3.引入routes文件夹里面的文件，这些文件主要处理URL路由。
+
+var index = require('./routes/index');
+var users = require('./routes/users');
+4.关联路由路径与引入的文件：
+
+app.use('/', index);
+app.use('/users', users);
+
+5.设置模板，views 设置了模板的位置；view engine设置了要使用的模板引擎。
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+6.最后处理错误的http请求：
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+routes文件夹
+以users.js为例，首先加载express，通过express获取到router对象。使用router对象指定路由的方法和路径。由于在app.js已经指定 /users 到本文件，因此当浏览器请求/user时，会执行下面的回调函数。
+
+var express = require('express');
+var router = express.Router();
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
+
+module.exports = router;
+回调函数有第三个参数next，主要用于中间件中，即将数据传递到下一个方法去处理。
+
+视图模板
+A template engine enables you to use static template files in your application. At runtime, the template engine replaces variables in a template file with actual values, and transforms the template into an HTML file sent to the client. This approach makes it easier to design an HTML page.
+
+Express 应用默认使用的是 pug 模板，views文件里面是所有的视图模板。在router文件里， 使用Response.render()指定要加载的模板和传递给模板的一些参数。下面的/routes/index.js文件里的示例：
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+下面是index.pug文件，传进来的title的值将替换它：
+
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}

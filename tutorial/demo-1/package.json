@@ -1,0 +1,19 @@
+{
+  "name": "Demo",
+  "description": "YOUR PROJECT DESCRIPTION HERE",
+  "author": "Tom <tom@gmail.com>",
+  "version": "1.0.2",
+  "dependencies": {
+    "underscore": "~1.8.3",
+    "connect": "3.4.1",
+    "express": "3.4.3",
+    "mongodb": "~2.0.43"
+  },
+  "devDependencies": {
+    "vows": "0.5.x",
+	"mocha": "*",
+	"should": "*"
+  },
+  "engine": "node >= 0.6.6"
+}
+

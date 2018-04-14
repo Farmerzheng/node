@@ -1,0 +1,57 @@
+Windows 平台安装 MongoDB
+
+配置环境变量。这个是我的path：C:\Program Files\MongoDB\Server\3.2\bin
+
+
+1、下载安装
+2、配置存放日志和数据的目录
+   在C:\Program Files\MongoDB\Server\3.2 目录下，创建一个mongodb.cfg 配置文件，文件内容如下：
+
+    dbpath=D:\mongodb\data\db
+    logpath=D:\mongodb\data\log\mongodb.log
+
+    并且在d盘创建对应配置路径的文件夹
+
+3、启动MongoDB服务器
+
+打开控制台cmd，进入mongodb安装目录/bin文件下运行命令：
+
+mongod  --config  "C:\Program Files\MongoDB\Server\3.2\mongodb.cfg"
+
+--config 选项表示启动时通过C:\Program Files\MongoDB\Server\3.2\mongodb.cfg 来启动
+
+   
+
+4、测试一下是否配置正常
+     在 C:\Program Files\MongoDB\Server\3.2\bin目录下，运行mongo命令，测试一下连接
+     如果命令出现如下提示说明链接正常：
+
+     MongoDB shell version: 3.2.18-21-g97af1fa
+     connecting to: test
+
+5、添加MongoDB到Windows Service
+
+  当我们把运行MongoDB服务器的命令界面关掉，我们就不能链接MongoDB了
+  把MongoDB添加到Windows Service后,我们就可以在命令行上启动和关闭服务，这样方便了我们操作和管理服务。
+
+  如何把MongoDB添加到到Windows Service？
+  
+
+  第一步：进入dos命令界面(必须以管理员身份打开cmd)
+     管理员打开  ----> C:\Windows\System32  下面有 cmd程序
+
+  ，先进入到cd  C:\Program Files\MongoDB\Server\3.2\bin目录下，执行命令：
+
+    mongod  --config  "C:\Program Files\MongoDB\Server\3.2\mongodb.cfg" --auth --install --serviceName "MongoDB" 
+
+  第二步：启动/关闭MongoDB服务
+
+      net start mongodb 启动MongoDB服务
+
+      net stop mongodb 关闭MongoDB服务
+
+  第三步：测试一下，浏览器输入 http://localhost:27017   
+          我们会发现，关闭了命令行窗口，http://localhost:27017 页面依然可以访问
+          重启电脑，再测试，我们会发现，数据库依然开启！！！
+
+

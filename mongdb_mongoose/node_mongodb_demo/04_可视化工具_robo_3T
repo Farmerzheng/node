@@ -9,3 +9,6 @@ https://blog.csdn.net/potato512/article/details/77844919
 如何添加用户？
 
 如何修改用户名、密码？
+
+如何链接具有auth认证的数据库？
+file-->connect--->new connection -->authentication进行设置

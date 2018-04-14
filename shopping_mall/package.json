@@ -11,7 +11,11 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
+    "jshint": "^2.9.5",
     "mongoose": "^5.0.14",
     "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "jslint": "^0.12.0"
   }
 }

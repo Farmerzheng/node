@@ -9,6 +9,7 @@ Windows 平台安装 MongoDB
 
     dbpath=D:\mongodb\data\db
     logpath=D:\mongodb\data\log\mongodb.log
+    auth=true
 
     并且在d盘创建对应配置路径的文件夹
 
@@ -43,6 +44,8 @@ mongod  --config  "C:\Program Files\MongoDB\Server\3.2\mongodb.cfg"
   ，先进入到cd  C:\Program Files\MongoDB\Server\3.2\bin目录下，执行命令：
 
     mongod  --config  "C:\Program Files\MongoDB\Server\3.2\mongodb.cfg" --auth --install --serviceName "MongoDB" 
+
+    注：--auth 是以授权的方式启动
 
   第二步：启动/关闭MongoDB服务
 

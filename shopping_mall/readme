@@ -1,0 +1,47 @@
+
+
+1、
+   install express globally
+     > npm install express-generator -g
+
+   init a express project
+     > express shopping_mall
+
+   change directory:
+     > cd express
+
+   install dependencies:
+     > npm install
+
+   run the app:
+     > npm start
+
+3.安装package.json中依赖的包文件 （moongose 等）
+  npm install 
+    
+       
+
+2、
+  use mongoose  instead of mongodb
+
+  a、创建一个model文件夹，在下面新建goods.js文件
+     goods文件内容如下：
+        let mongoose = require("mongoose");
+        let Schema = mongoose.Schema;
+
+        let productSchema = new Schema({
+            "productId": String,
+            "productName": String,
+            "salePrice": Number,
+            "productImage": String,
+            "productUrl": String
+        })
+
+        module.exports = mongoose.model("Good", productSchema);
+
+  b、在routes文件夹下新建goods.js的路由文件
+
+  c、修改app.js文件（增加goods路由）
+     var goodsRouter = require('./routes/goods');
+     app.use('/goods', goodsRouter);
+

@@ -25,3 +25,5 @@ eg: pm2 stop mall --watch
 pm2 stop 进程名称
 eg:pm2 stop mall
 
+
+

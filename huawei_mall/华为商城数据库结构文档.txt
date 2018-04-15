@@ -1,0 +1,77 @@
+﻿******华为商城数据库结构文档******
+
+
+
+1、管理员列表集合------adminList
+    1、id               唯一的标识
+    2、adminName        管理员的名字
+    3、passWord         管理员的密码
+    4、addTime          添加的时间
+2、管理员日志------adminLog
+    1、id               唯一的标识
+    2、adminId        	进行操作的管理员ID
+    3、adminName        进行操作的管理员名字
+    4、loginfo          进行的具体操作
+    5、addTime          添加的时间
+3、广告列表集合------advList
+    1、id               唯一的标识
+    2、advName        	广告标题
+    3、advLink       	广告链接
+    4、advType          广告类型(0、轮播图，1、头部菜单)
+    5、addTime          广告的图片
+    6、addTime          添加的时间
+4、广告日志集合------advLog
+    1、id               唯一的标识
+    2、adminId        	进行操作的管理员ID
+    3、adminName        进行操作的管理员名字
+    4、loginfo          进行的具体操作
+    5、addTime          添加的时间
+5、购物车列表集合------cartList
+    1、id               唯一的标识
+    2、userId        	用户的ID，标识是谁的购物车
+    3、userName       	用户的名字
+    4、itemId           购物车物品的ID
+    5、itemName         购物车物品名字
+    6、itemPrice        购物车物品价格
+    7、itemPic          购物车物品图片
+    8、itemNum          购物车物品数量
+    9、isCheck        	购物车物品是否为选中状态(0、未选中，1、已选中)
+    10、isCheck        	购物车目前状态(1、未提交状态，2、已完成状态)
+    11、addTime         添加的时间
+6、商品列表集合------itemList
+    1、id               唯一的标识
+    2、itemName         商品的名字
+    3、itemPrice        商品的价格
+    4、itemInfo         商品的描述
+    5、itemType         商品的类别
+    6、itemPic        	商品的图片
+    7、addTime          添加的时间
+7、商品日志集合------itemLog
+    1、id               唯一的标识
+    2、adminId        	进行操作的管理员ID
+    3、adminName        进行操作的管理员名字
+    4、loginfo          进行的具体操作
+    5、addTime          添加的时间
+8、手机注册验证码集合------regList
+    1、id               唯一的标识
+    2、phone        	  注册的手机号
+    3、regNum        	  注册时需要的验证码
+    4、addTime          添加的时间
+9、用户列表集合------userList
+    1、id               唯一的标识
+    2、userName 	      用户名
+    3、phone        	  注册时的手机号
+    4、passWord         用户密码
+    5、goldNum          当前余额
+    6、goldSum          总共充值金额数量
+    7、addTime          添加的时间
+10、用户日志集合------userLog
+    1、id               唯一的标识
+    2、userId        	  进行操作的用户ID
+    3、userIName        进行操作的用户名字
+    4、loginfo          进行的具体操作
+    5、addTime          添加的时间
+
+
+
+******华为商城数据库结构文档******

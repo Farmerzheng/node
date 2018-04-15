@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "formidable": "^1.1.1",
+    "js-md5": "^0.7.3",
+    "jwt-simple": "^0.5.1",
+    "mongodb": "^3.0.1"
+  }
+}

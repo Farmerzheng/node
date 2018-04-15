@@ -1,0 +1,593 @@
+﻿******华为商城接口文档******
+
+
+
+[后台管理系统]
+
+
+①管理员页面：
+
+1、增加管理员
+
+    地址：http://127.0.0.1:3333/addadmin
+    方式：post
+    需要接收的参数：
+	adminname------管理员名字
+	password1------密码
+	password2------确认密码
+    返回参数：
+        成功：
+           res.send({
+                code:0,
+                msg:"任务成功完成"
+            })
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+2、管理员登录
+
+    地址：http://127.0.0.1:3333/adminlogin
+    方式：get
+    需要接收的参数：
+	adminname------管理员名字
+	password------密码
+    返回参数：
+        成功：
+ 	res.send({
+           code: 0,
+	      msg: "登录成功",
+	      adminId: admininfo._id,
+	      adminName: admininfo.adminName,
+	      token: jwt.setToken({
+	      adminId: admininfo._id
+	    })
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+3、获取管理员列表
+
+    地址：http://127.0.0.1:3333/adminlist
+    方式：get
+    需要接收的参数：无
+    返回参数：
+        成功：
+	 res.send({
+           code: 0,
+	   msg: "获取成功",
+	   adminList: results
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+4、获取管理员日志列表
+
+    地址：http://127.0.0.1:3333/adminlog
+    方式：get
+    需要接收的参数：无
+    返回参数：
+        成功：
+	 res.send({
+           code: 0,
+	   msg: "获取成功",
+	   adminList: results
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+5、修改当前管理员密码
+
+    地址：http://127.0.0.1:3333/changePwd
+    方式：post
+    需要接收的参数：
+	adminId------管理员ID
+	password1------密码
+	password2------确认密码
+    返回参数：
+        成功：
+ 	res.send({
+           code: 0,
+	   msg: "任务成功完成",
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+6、删除管理员
+
+    地址：http://127.0.0.1:3333/deladmin
+    方式：get
+    需要接收的参数：
+	adminId------欲删除的管理员ID
+    返回参数：
+        成功：
+ 	res.send({
+           code: 0,
+	   msg: "任务成功完成",
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+②广告管理页面
+
+1、添加广告
+
+    地址：http://127.0.0.1:3333/addadv
+    方式：post
+    需要接收的参数：
+	formdata------表单数据
+    返回参数：
+        成功：
+ 	res.send({
+           code: 0,
+	   msg: "任务成功完成",
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+2、获取广告列表
+
+    地址：http://127.0.0.1:3333/getadvtype
+    方式：get
+    需要接收的参数：
+	type------广告类型
+	Num------需要返回的广告数量
+    返回参数：
+        成功：
+          res.send({
+	    code: 0,
+	    msg: "获取成功",
+	    advlist: results,
+	    advtype: serverMsg.advType
+	  })
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+3、获取广告日志列表
+
+    地址：http://127.0.0.1:3333/getadvlog
+    方式：get
+    需要接收的参数：无
+    返回参数：
+        成功：
+           res.send({
+		code: 0,
+		msg: "获取成功",
+		advlist: results,
+		advtype: serverMsg.advType,
+		types: req.query.type
+	})
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+4、删除广告
+
+    地址：http://127.0.0.1:3333/deladv
+    方式：get
+    需要接收的参数：
+	advid------广告的ID
+	adminid------进行操作的管理员ID
+	adminname------进行操作的管理员名字
+    返回参数：
+        成功：
+           res.send({
+		code: 0,
+		msg: "任务成功完成",
+	})
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+③商品管理页面
+
+1、添加商品
+
+    地址：http://127.0.0.1:3333/additem
+    方式：post
+    需要接收的参数：
+	formdata------表单数据
+    返回参数：
+        成功：
+ 	res.send({
+           code: 0,
+	   msg: "任务成功完成",
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+2、获取商品列表
+
+    地址：http://127.0.0.1:3333/getitem
+    方式：get
+    需要接收的参数：
+	keyword------广告关键字
+	pageindex------当前页数
+	type------商品类别
+    返回参数：
+        成功：
+         res.send({
+		code: 0,
+		msg: "获取成功",
+		itemlist: results,
+		typelist: serverMsg.itemType,
+		pagesum: pagesum < 0 ? 1 : pagesum,
+		pageindex: pageindex,
+		itemtype: req.query.type
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+3、删除商品
+
+    地址：http://127.0.0.1:3333/delitem
+    方式：get
+    需要接收的参数：
+	adminname------执行操作的管理员名字
+	adminid------执行操作的管理员ID
+	itemid------商品的ID
+    返回参数：
+        成功：
+         res.send({
+           code: 0,
+	   msg: "任务成功完成",
+	}
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+4、获取商品日志列表
+
+    地址：http://127.0.0.1:3333/itemlog
+    方式：get
+    需要接收的参数：无
+    返回参数：
+        成功：
+        res.send({
+		code: 0,
+		msg: "查找成功",
+		itemlog: results
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+④用户管理页面
+
+1、发送短信验证码
+
+    地址：http://127.0.0.1:3333/sendphone
+    方式：get
+    需要接收的参数：
+	phone------用户手机号
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "获取验证码成功:验证码为:" + chacknum
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+2、提交注册信息
+
+    地址：http://127.0.0.1:3333/subregnum
+    方式：get
+    需要接收的参数：
+	phone------用户手机号
+	regnum-----验证码
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "任务成功完成"
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+3、获取用户列表
+
+    地址：http://127.0.0.1:3333/userlist
+    方式：get
+    需要接收的参数：无
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "查询成功!",
+		userlist: userlist
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+4、删除用户
+
+    地址：http://127.0.0.1:3333/deluser
+    方式：get
+    需要接收的参数：
+	adminid------执行操作的管理员ID
+	userid------欲删除的用户ID
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "任务成功完成",
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+5、用户余额管理
+
+    地址：http://127.0.0.1:3333/setgold
+    方式：post
+    需要接收的参数：
+	userid------欲进行操作的用户ID
+	goldtype------增加还是减少
+	num------具体数量
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "任务成功完成",
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+6、获取日志
+
+    地址：http://127.0.0.1:3333/userlog
+    方式：get
+    需要接收的参数：无
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "查找成功",
+		userlog: results
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+[前台商城页面]
+
+①广告部分
+
+1、获取广告列表
+
+    地址：http://127.0.0.1:3333/getadvtype
+    方式：get
+    需要接收的参数：
+	type------欲获取的广告类别
+	num------欲获取的广告数量
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "获取成功",
+		advlist: results,
+		advtype: serverMsg.advType,
+		types: req.query.type
+	})
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+②商品部分
+
+1、获取商品列表
+
+    地址：http://127.0.0.1:3333/getitemlist
+    方式：get
+    需要接收的参数：
+	type------欲获取的商品类别
+	num------欲获取的商品数量
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "获取成功",
+		itemlist: results,
+		type: req.query.type / 1
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+2、获取单个商品详情
+
+    地址：http://127.0.0.1:3333/getsingleitem
+    方式：get
+    需要接收的参数：
+	itemid------商品ID
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "获取成功",
+		itemlist: results,
+		type: req.query.type / 1
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+3、添加到购物车
+
+    地址：http://127.0.0.1:3333/setcart
+    方式：post
+    需要接收的参数：
+	itemid: 商品的ID
+	userid: 用户ID
+	username: 用户名字
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "获取成功",
+		itemlist: results,
+		type: req.query.type / 1
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+4、获取购物车
+
+    地址：http://127.0.0.1:3333/getcart
+    方式：get
+    需要接收的参数：
+	userid: 用户ID
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "查询成功",
+		cartlist: cartinfo
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+5、购物车数量加减
+
+    地址：http://127.0.0.1:3333/addandless
+    方式：get
+    需要接收的参数：
+	type------加或减
+	itemid------商品ID
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "任务成功完成",
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+6、购物车单选
+
+    地址：http://127.0.0.1:3333/itemcheck
+    方式：get
+    需要接收的参数：
+	itemid------商品ID
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "任务成功完成",
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+7、购物车全选和反选
+
+    地址：http://127.0.0.1:3333/allchecks
+    方式：get
+    需要接收的参数：
+	userid------用户ID
+	type------全选或反宣
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "任务成功完成",
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+8、提交购物车
+
+    地址：http://127.0.0.1:3333/subcart
+    方式：get
+    需要接收的参数：
+	userid------用户的ID
+	username------用户的名字
+    返回参数：
+        成功：
+ 	res.send({
+		code: 0,
+		msg: "任务成功完成",
+	});
+        失败：
+             res.send({
+                code:"错误的具体代码",
+                msg:"失败的原因"
+            })
+
+
+
+******华为商城接口文档******

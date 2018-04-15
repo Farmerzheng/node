@@ -1,3 +1,8 @@
-cnpm install -g vue-cli
+npm install -g vue-cli
 
 vue init webpack mall
+
+cd mall
+
+npm run dev
+

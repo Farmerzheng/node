@@ -45,3 +45,8 @@
      var goodsRouter = require('./routes/goods');
      app.use('/goods', goodsRouter);
 
+
+Express使用html模板
+
+
+

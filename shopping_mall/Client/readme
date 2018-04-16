@@ -1,6 +1,6 @@
 npm install -g vue-cli
 
-vue init webpack mall
+vue init webpack mall(? Use ESLint to lint your code? (Y/n) n)
 
 cd mall
 

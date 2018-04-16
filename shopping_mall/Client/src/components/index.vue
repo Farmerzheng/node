@@ -10,6 +10,7 @@
   import MallHeader from './base_component/mall_header' 
   import Router from './base_component/router'
   import GoodList from './good_list'
+  
   export default {
     name: 'HelloWorld',
     data() {

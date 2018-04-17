@@ -38,10 +38,7 @@ module.exports = {
             "/goods": {
                 // 当访问/goods的时候我们让他访问http://localhost:3000下面的/goods
                 target: "http://localhost:3000",
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/list': '/'
-                }
+                changeOrigin: true
             }
         }
     },

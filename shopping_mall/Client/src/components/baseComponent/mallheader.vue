@@ -47,6 +47,8 @@
     line-height: 80px;
   }
   .user li{
-    cursor:pointer
+    cursor:pointer;
+    display: inline-block;
+    margin:0 10px;
   }
 </style>

@@ -7,18 +7,28 @@
                 <span>价格升序</span>
             </div>
         </div>
-        <div class="goods">
-            <div class="price">
-                <span>价格</span>
+        <div class="goods clearfix">
+            <div class="price pull_left">
+                <ul>
+                    <li class="price_item">全部</li>
+                    <li class="price_item">0~100</li>
+                    <li class="price_item">100~500</li>
+                    <li class="price_item">500~1000</li>
+                    <li class="price_item">1000~2000</li>
+                </ul>
             </div>
-            <div class="list">
+            <div class="list pull_right">
                 <ul class="list_wrap">
-                    <li class="good_item" v-for="item in good_list">
+                    <li class="good_item" v-for="item in goodList">
                         <a href="">
-                            <image class="product_image" :src=item.productImage />
-                            <h3 class="product_name">{{item.productName}}</h3>
-                            <p class="product_price">{{item.salePrice}}</p>
-                            <p class="add_cart">加入购物车</p>
+                            <div class="item_img">
+                                <img class="product_image" v-bind:src='"/images/"+item.productImage' />
+                            </div>
+                            <div class="item_des">
+                                <p class="product_name">{{item.productName}}</p>
+                                <p class="product_price">￥{{item.salePrice}}</p>
+                                <p class="add_cart">加入购物车</p>
+                            </div>
                         </a>
                     </li>
                 </ul>
@@ -36,7 +46,7 @@
         name: 'HelloWorld',
         data() {
             return {
-                good_list: null
+                goodList: null
             }
         },
         created() {
@@ -46,8 +56,8 @@
             getGoodsList() {
                 axios.get('/goods').then((res) => {
                     if (res.data.status == ERR_OK) {
-                        this.good_list = res.data.result.list;  
-                        console.log(this.good_list)                   
+                        this.goodList = res.data.result.list;
+                        console.log(this.goodList)
                     }
                 })
             }
@@ -63,9 +73,60 @@
     .sort_buy {
         width: 1200px;
         height: 50px;
+        margin: 0 auto;
         line-height: 50px;
+    }
+    .goods {
+        width: 1200px;
+        margin: 0 auto;
     }
     .sort_buy span {
         cursor: pointer;
+    }
+    .price {
+        width: 200px;
+    }
+    .price_item {
+        padding: 20px 20px;
+        cursor: pointer;
+        transition: .5s;
+        transform: translate(0, 0);
+    }
+    .price_item:hover {
+        transform: translate(10px, 0);
+        color: orange;
+        border-left: 2px solid orange;
+    }
+    .list {
+        width: 1000px;
+        text-align: center;
+    }
+    .list_wrap {
+        width: 100%;
+    }
+    .good_item {
+        background-color: #fff;
+        display: inline-block;
+        margin: 10px 10px;
+        border: 1px solid #eee;
+    }
+    .product_image {
+        width: 300px;
+    }
+    .item_des {
+        width: 100%;
+        text-align: left;
+    }
+    .item_des p{
+        margin:10px 10px;
+    }
+    .add_cart {
+        width: 200px;
+        height: 30px;
+        display: inline-block;
+        line-height: 30px;
+        border: 1px solid #d1434a;
+        color: #d1434a;
+        text-align: center;
     }
 </style>

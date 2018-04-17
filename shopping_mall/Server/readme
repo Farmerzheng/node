@@ -46,7 +46,13 @@
      app.use('/goods', goodsRouter);
 
 
-Express使用html模板
+3、启动服务器
+   pm2 start bin/www
+   pm2 start www --name mall
+   pm2 start mall --watch
+
+4、启动服务器后打开页面  
+   在Client  文件夹下 npm run dev 
 
 
 

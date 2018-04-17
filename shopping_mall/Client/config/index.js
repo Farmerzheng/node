@@ -10,12 +10,13 @@ module.exports = {
         // Paths
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
-        proxyTable: {},
 
         // Various Dev Server settings
         host: 'localhost', // can be overwritten by process.env.HOST
-        port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-        autoOpenBrowser: false,
+        // 开发服务器监听的特定端口
+        port: 8080,
+        // 是否自定代开浏览器
+        autoOpenBrowser: true,
         errorOverlay: true,
         notifyOnErrors: true,
         poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
@@ -34,11 +35,14 @@ module.exports = {
         cacheBusting: true,
 
         cssSourceMap: true,
+        // changeOrigin参数，接收一个布尔值，如果设置为true,那么本地会虚拟一个服务端接收你的请求并代你发送该请求，这样就不会有跨域问题了，当然这只适用于开发环境。
         proxyTable: {
-            "/goods": {
-                // 当访问/goods的时候我们让他访问http://localhost:3000下面的/goods
+            // 我们在写url的时候，只用写成/goods就可以代表http://localhost:3000/goods.
+
+            "/": {
                 target: "http://localhost:3000",
-                changeOrigin: true
+                changeOrigin: true,
+                pathRewrite: { '^/api': '/api' }
             }
         }
     },

@@ -31,6 +31,7 @@ mongoose.connection.on("disconnected", function() {
 })
 
 router.get("/", function(req, res, next) {
+
     console.log(req, 1);
 
     Good.find({}, function(err, doc) {

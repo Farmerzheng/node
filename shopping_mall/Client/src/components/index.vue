@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import MallHeader from './baseComponent/mallheader' 
-  import Router from './baseComponent/router'
+  import MallHeader from './base_component/mallheader' 
+  import Router from './base_component/router'
   import GoodList from './goodlist'
   
   export default {

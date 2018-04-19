@@ -54,8 +54,33 @@
 4、添加静态资源文件（图片资源）到public的images文件夹
    可以在http://localhost:8080/images/pingheng.jpg访问到对应的图片
 
-5、
-  
+5、在 vs中如何调试 node.js 
+   a、关闭pm2中的进程
+   b.配置launch.json
+          {
+        "version": "0.2.0",
+        "configurations": [
+            
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "启动程序",
+                "program": "D:/H5/node/shopping_mall/Server/bin/www"
+            },
+            {
+                "type": "node",
+                "request": "attach",
+                "name": "附加到端口",
+                "address": "localhost",
+                "port": 3000 // 和www文件端口保持一致
+            }
+            ]
+        }
+
+      c : 打断点
+      d : 在浏览器中刷新页面，重新发送请求
+
+      
 
 
 

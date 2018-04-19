@@ -12,7 +12,6 @@
   import GoodList from './goodlist'
   
   export default {
-    name: 'HelloWorld',
     data() {
       return {}
     },

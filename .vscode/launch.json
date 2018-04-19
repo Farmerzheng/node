@@ -1,0 +1,31 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+       {
+           "name": "Launch",
+           "type": "node", 
+           "request": "launch",
+           "program": "D:/H5/node/shopping_mall/Server/bin/www",
+           "stopOnEntry": false,
+           "args": [],
+           "cwd": ".",
+           "runtimeExecutable": null,
+           "runtimeArgs": [
+               "--nolazy"
+           ],
+           "env": {
+               "NODE_ENV": "development"
+           },
+           "console": "internalConsole",
+           "preLaunchTask": "",
+           "sourceMaps": false,
+           "outFiles":[]
+       },
+       {
+           "name": "Attach",
+           "type": "node",
+           "request": "attach",
+           "port": 3000
+       }
+   ]
+}

@@ -1,4 +1,4 @@
-客户端网址 ：http://localhost:8080/#/goods
+客户端网址 ：http://localhost:8080/
 服务器网址 ：http://localhost:3000/goods/
 数据库网址 ：http://localhost:27017/
 
@@ -11,6 +11,4 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 这个表示，当vue项目进行build打包后会生成dist目录，express会将这个目录处理成静态文件目录
 
-express服务使用的是3000端口，vue使用的8080端口，
-由于跨域所以要配置好vue-cli的proxyTable 选项,
-位于config/index.js,改写proxyTable.
+

@@ -6,3 +6,24 @@ cd mall
 
 npm run dev
 
+express服务使用的是3000端口，vue使用的8080端口，
+由于跨域所以要配置好vue-cli的proxyTable 选项,
+位于config/index.js,改写proxyTable
+     proxyTable: {
+            // 我们在写url的时候，只用写成/goods就可以代表http://localhost:3000/goods.
+
+            "/": {
+                target: "http://localhost:3000",
+                changeOrigin: true
+            }
+        }
+
+axios的用法
+  在main.js中引入axios：import axios from "axios";
+  与很多第三方模块不同的，axios不能使用use方法，应该进行如下操作：Vue.prototype.$axios = axios
+  我们就可以在所有Vue组件中使用axios了
+    created:function(){
+        this.$axios.get("/seller",{"id":123}).then(res=>{
+            console.log(res.data);
+        });
+    }

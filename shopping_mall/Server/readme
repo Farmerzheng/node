@@ -22,7 +22,7 @@
        
 
 2、
-  use mongoose  instead of mongodb
+  使用mongoose
 
   a、创建一个model文件夹，在下面新建goods.js文件
      goods文件内容如下：
@@ -47,12 +47,17 @@
 
 
 3、启动服务器
-   pm2 start bin/www
+   pm2 start bin/www 
    pm2 start www --name mall
    pm2 start mall --watch
 
-4、启动服务器后打开页面  
-   在Client  文件夹下 npm run dev 
+4、添加静态资源文件（图片资源）到public的images文件夹
+   可以在http://localhost:8080/images/pingheng.jpg访问到对应的图片
+
+5、
+  
+
+
 
 
 

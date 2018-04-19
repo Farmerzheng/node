@@ -43,7 +43,6 @@
         ERR_OK
     } from '../api/api.config'
     export default {
-        name: 'HelloWorld',
         data() {
             return {
                 goodList: null
@@ -54,7 +53,7 @@
         },
         methods: {
             getGoodsList() {
-                axios.get('/goods').then((res) => {
+                this.$axios.get('/goods',{page:1}).then((res) => {
                     if (res.data.status == ERR_OK) {
                         this.goodList = res.data.result.list;
                         console.log(this.goodList)

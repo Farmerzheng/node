@@ -53,7 +53,8 @@
         },
         methods: {
             getGoodsList() {
-                this.$axios.get('/goods',{page:1}).then((res) => {
+                let data = {page:1,perPage:4};
+                this.$axios.get('/goods',{params:data}).then((res) => {
                     if (res.data.status == ERR_OK) {
                         this.goodList = res.data.result.list;
                         console.log(this.goodList)

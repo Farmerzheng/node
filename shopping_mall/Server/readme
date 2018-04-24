@@ -47,15 +47,13 @@
 
 
 3、启动服务器
-   pm2 start bin/www 
-   pm2 start www --name mall
-   pm2 start mall --watch
+   node bin/www
 
 4、添加静态资源文件（图片资源）到public的images文件夹
    可以在http://localhost:8080/images/pingheng.jpg访问到对应的图片
 
 5、在 vs中如何调试 node.js 
-   a、关闭pm2中的进程
+   a、关闭服务器
    b.配置launch.json
           {
         "version": "0.2.0",
@@ -65,7 +63,7 @@
                 "type": "node",
                 "request": "launch",
                 "name": "启动程序",
-                "program": "D:/H5/node/shopping_mall/Server/bin/www"
+                "program": "D:/H5/node/shopping_mall/server/bin/www"
             },
             {
                 "type": "node",
@@ -78,6 +76,7 @@
         }
 
       c : 打断点
+      d : 启动调试功能（单击绿三角）
       d : 在浏览器中刷新页面，重新发送请求
 
       

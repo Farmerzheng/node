@@ -17,3 +17,81 @@ var PersonSchema;   //Person的文本属性
 var PersonModel;    //Person的数据库模型
 var PersonEntity;   //Person实体
 
+mongoose使用
+1、引用mongoose模块
+    let mongoose = require("mongoose");
+
+2、链接数据库
+    mongoose.connect("mongodb://zhangsan:123456@127.0.0.1:27017/my_db?authSource=admin")
+
+3、监听是否链接成功
+
+链接成功
+mongoose.connection.on("connected", function() {
+        console.log("mongodb connected success");
+    })
+
+链接失败
+mongoose.connection.on("error", function() {
+        console.log("mongodb connected fail");
+    })
+    
+断开链接
+mongoose.connection.on("disconnected", function() {
+    console.log("mongodb connected disconnected");
+})    
+
+4、成功链接数据库后，就可以执行对数据库的相应操作（在回调中处理）
+
+    a 、定义一个Schema,发布为Model
+
+        let Schema = mongoose.Schema;
+       
+        let productSchema = new Schema({
+                "productId": String,
+                "productName": String,
+                "salePrice": Number,
+                "productImage": String,
+                "productUrl": String
+            })
+
+        module.exports = mongoose.model("good", productSchema)
+
+5、查询是数据库中运用最多也是最麻烦的地方
+
+    通常有2种查询方式，一种是直接查询，一种是链式查询
+    
+    直接查询
+
+    在查询时带有回调函数的，称之为直接查询，查询的条件往往通过API来设定，例如：
+    PersonModel.findOne({'name.last':'dragon'},'some select',function(err,doc){
+     
+    });
+    
+    间接查询
+
+    在查询时候，不带回调，而查询条件通过API函数来制定，例如：
+    var query = PersonModel.findOne({'name.last':'dragon'});
+    query.select('some select');
+    query.exec(function(err,doc){
+
+    })
+
+    这种方式相对直接查询，分的比较明细，如果不带callback，则返回query
+    query没有执行的预编译查询语句，该query对象执行的方法都将返回自己，
+    只有在执行exec方法时才执行查询，而且必须有回调。
+
+　　因为query的操作始终返回自身，我们可以采用更形象的链式写法
+
+    Person
+      .find({ occupation: /host/ })
+      .where('name.last').equals('Ghost')
+      .where('age').gt(17).lt(66)
+      .where('likes').in(['vaporizing', 'talking'])
+      .limit(10)
+      .sort('-occupation')
+      .select('name occupation')
+      .exec(callback);
+
+
+     

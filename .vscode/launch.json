@@ -6,7 +6,7 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "D:/H5/node/shopping_mall/Server/bin/www"
+            "program": "D:/H5/node/shopping_mall/server/bin/www"
         },
         {
             "type": "node",

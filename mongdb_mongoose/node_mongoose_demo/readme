@@ -70,28 +70,36 @@ mongoose.connection.on("disconnected", function() {
     
     间接查询
 
-    在查询时候，不带回调，而查询条件通过API函数来制定，例如：
-    var query = PersonModel.findOne({'name.last':'dragon'});
-    query.select('some select');
-    query.exec(function(err,doc){
-
-    })
-
+    在查询时候，不带回调，而查询条件通过API函数来制定
     这种方式相对直接查询，分的比较明细，如果不带callback，则返回query
-    query没有执行的预编译查询语句，该query对象执行的方法都将返回自己，
+    该query对象执行的方法都将返回自己，
     只有在执行exec方法时才执行查询，而且必须有回调。
 
 　　因为query的操作始终返回自身，我们可以采用更形象的链式写法
 
-    Person
-      .find({ occupation: /host/ })
-      .where('name.last').equals('Ghost')
-      .where('age').gt(17).lt(66)
-      .where('likes').in(['vaporizing', 'talking'])
-      .limit(10)
-      .sort('-occupation')
-      .select('name occupation')
-      .exec(callback);
+        // 根据前台传过来的参数在数据库拿数据
+        // 分页查询 limit skip
+        Good.find({})
+            .limit(perPage)
+            .skip((page - 1) * perPage)
+            .exec(function(err, doc) {
+                console.log(doc);
+                if (err) {
+                    res.json({
+                        status: "1",
+                        error: err.message
+                    })
+                } else {
+                    res.json({
+                        status: "0",
+                        msg: "成功了",
+                        result: {
+                            count: doc.length,
+                            list: doc
+                        }
+                    })
+                }
+            })
 
 
      

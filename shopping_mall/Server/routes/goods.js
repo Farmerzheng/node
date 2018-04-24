@@ -38,28 +38,36 @@ function responseQuery() {
         // console.log(req);  {page: "1", perPage: "4"}
 
         let params = req.query;
+        let page = parseInt(req.query.page);
+        let perPage = parseInt(req.query.perPage);
+        let sort = parseInt(req.query.sort)
+
+        console.log(req.query)
 
         // 根据前台传过来的参数在数据库拿数据
-
-
-
-        Good.find({}, function(err, doc) {
-            if (err) {
-                res.json({
-                    status: "1",
-                    error: err.message
-                })
-            } else {
-                res.json({
-                    status: "0",
-                    msg: "成功了",
-                    result: {
-                        count: doc.length,
-                        list: doc
-                    }
-                })
-            }
-        })
+        // 分页查询 limit skip
+        Good.find({})
+            .sort({ 'salePrice': sort }) //1 是升序 -1是降序
+            .limit(perPage)
+            .skip((page - 1) * perPage)
+            .exec(function(err, doc) {
+                console.log(doc);
+                if (err) {
+                    res.json({
+                        status: "1",
+                        error: err.message
+                    })
+                } else {
+                    res.json({
+                        status: "0",
+                        msg: "成功了",
+                        result: {
+                            count: doc.length,
+                            list: doc
+                        }
+                    })
+                }
+            })
     })
 }
 

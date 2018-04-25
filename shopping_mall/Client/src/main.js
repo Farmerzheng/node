@@ -6,6 +6,10 @@ import router from './router'
 import axios from 'axios'
 // 移入全局css样式
 import './common/css/common.css'
+// 引入下拉加载插件
+import infiniteScroll from 'vue-infinite-scroll'
+
+Vue.use(infiniteScroll)
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios;

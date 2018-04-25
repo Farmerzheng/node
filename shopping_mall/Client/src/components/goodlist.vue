@@ -4,7 +4,7 @@
             <div class="pull_right">
                 <span>排序：</span>
                 <span>默认</span>
-                <span>价格升序</span>
+                <span @click="sortGoods">降序</span>
             </div>
         </div>
         <div class="goods clearfix">
@@ -32,6 +32,9 @@
                         </a>
                     </li>
                 </ul>
+                <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10" class="more" v-show="moreBoolean">
+                    加载中……^
+                </div>
             </div>
         </div>
     </div>
@@ -45,21 +48,70 @@
     export default {
         data() {
             return {
-                goodList: null
+                goodList: [],
+                sort: 1,
+                page: 1,
+                perPage: 4,
+                busy: true,
+                moreBoolean: true
             }
         },
         created() {
             this.getGoodsList();
         },
         methods: {
-            getGoodsList() {
-                let data = {page:2,perPage:6,sort:1};
-                this.$axios.get('/goods',{params:data}).then((res) => {
+            // 加载首页数据
+            getGoodsList(flag) {
+                let param = {
+                    page: this.page,
+                    perPage: this.perPage,
+                    sort: this.sort
+                };
+                this.$axios.get('/goods', {
+                    params: param
+                }).then((res) => {
                     if (res.data.status == ERR_OK) {
-                        this.goodList = res.data.result.list;
-                        console.log(this.goodList)
+                        
+                   
+                     
+                        if (flag) {
+                        //    滚动到底部加载数据
+                            this.goodList = this.goodList.concat(res.data.result.list);
+                        //    加载完数据，启动滚动监听
+                            this.busy = false;
+                        } else {
+                            // 第一次进入页面
+                            this.goodList = res.data.result.list;
+                            this.busy = false;
+                        }
+
+                             //  如果请求不到数据了
+                        if(res.data.result.list.length ===0){
+                            // 隐藏加载提示
+                          this.moreBoolean = false;
+                         //   禁用滚动监听
+                          this.busy = true;
+                        }
                     }
                 })
+            },
+            // 降序
+            sortGoods() {
+                this.sort = -1;
+                this.page = 1;
+                //   console.log(this.sort)
+                this.getGoodsList();
+            },
+            loadMore() {
+                console.log(1);
+                // 停止滚动监听
+                this.busy = true;
+                //官方示例中延迟了1秒，防止滚动条滚动时的频繁请求数据
+                setTimeout(() => {
+                    this.page++;
+                    //     // 这里请求接口去拿数据，实际应该是调用一个请求数据的方法
+                    this.getGoodsList(true);
+                }, 1000);
             }
         }
     }
@@ -99,7 +151,7 @@
     }
     .list {
         width: 1000px;
-        text-align: center;
+        text-align: left;
     }
     .list_wrap {
         width: 100%;
@@ -117,8 +169,8 @@
         width: 100%;
         text-align: left;
     }
-    .item_des p{
-        margin:10px 10px;
+    .item_des p {
+        margin: 10px 10px;
     }
     .add_cart {
         width: 200px;
@@ -128,5 +180,11 @@
         border: 1px solid #d1434a;
         color: #d1434a;
         text-align: center;
+    }
+    .more {
+        text-align: center;
+        line-height: 60px;
+        background-color: #eee;
+        margin-bottom: 60px;
     }
 </style>

@@ -51,6 +51,7 @@ function responseQuery() {
             .limit(perPage)
             .skip((page - 1) * perPage)
             .exec(function(err, doc) {
+                //输入以下网址进行查询 http://localhost:3000/goods/?page=1&perPage=4&sort=1
                 console.log(doc);
                 if (err) {
                     res.json({

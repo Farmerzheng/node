@@ -3,6 +3,7 @@
     <mall-header></mall-header>
     <router></router>
     <good-list></good-list>
+    <foot></foot>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
   import MallHeader from './base_component/mallheader' 
   import Router from './base_component/router'
   import GoodList from './goodlist'
+  import Foot from './base_component/footer.vue'
   
   export default {
     data() {
@@ -23,7 +25,8 @@
     components: {
       MallHeader,
       Router,
-      GoodList
+      GoodList,
+      Foot
     }
   }
 </script>

@@ -10,6 +10,6 @@ app.use(express.static(path.join(__dirname, 'pubilc')));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 这个表示，当vue项目进行build打包后会生成dist目录，express会将这个目录处理成静态文件目录
-hahah
+
 
 

@@ -27,12 +27,12 @@ module.exports = {
          */
 
         // https://webpack.js.org/configuration/devtool/#development
-        devtool: 'cheap-module-eval-source-map',
+        devtool: '#cheap-module-eval-source-map',
 
         // If you have problems debugging vue-files in devtools,
         // set this to false - it *may* help
         // https://vue-loader.vuejs.org/en/options.html#cachebusting
-        cacheBusting: true,
+        cacheBusting: false,
 
         cssSourceMap: true,
         // changeOrigin参数，接收一个布尔值，如果设置为true,那么本地会虚拟一个服务端接收你的请求并代你发送该请求，这样就不会有跨域问题了，当然这只适用于开发环境。

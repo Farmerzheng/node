@@ -10,11 +10,11 @@
         <div class="goods clearfix">
             <div class="price pull_left">
                 <ul>
-                    <li class="price_item">全部</li>
-                    <li class="price_item">0~100</li>
-                    <li class="price_item">100~500</li>
-                    <li class="price_item">500~1000</li>
-                    <li class="price_item">1000~2000</li>
+                    <li class="price_item" @click="setPriceLevel(0)">全部</li>
+                    <li class="price_item" @click="setPriceLevel(1)">0~100</li>
+                    <li class="price_item" @click="setPriceLevel(2)">100~500</li>
+                    <li class="price_item" @click="setPriceLevel(3)">500~1000</li>
+                    <li class="price_item" @click="setPriceLevel(4)">1000~5000</li>
                 </ul>
             </div>
             <div class="list pull_right">
@@ -51,9 +51,10 @@
                 goodList: [],
                 sort: 1,
                 page: 1,
-                perPage: 4,
+                perPage: 3,
                 busy: true,
-                moreBoolean: true
+                moreBoolean: true,
+                level:0
             }
         },
         created() {
@@ -62,22 +63,23 @@
         methods: {
             // 加载首页数据
             getGoodsList(flag) {
+                // debugger;
                 let param = {
                     page: this.page,
                     perPage: this.perPage,
-                    sort: this.sort
+                    sort: this.sort,
+                    level:this.level
                 };
                 this.$axios.get('/goods', {
                     params: param
                 }).then((res) => {
-                    if (res.data.status == ERR_OK) {
-                        
-                   
+                         debugger;
+                    if (res.data.status == ERR_OK) {  
                      
                         if (flag) {
-                        //    滚动到底部加载数据
+                            //滚动到底部加载数据
                             this.goodList = this.goodList.concat(res.data.result.list);
-                        //    加载完数据，启动滚动监听
+                            //加载完数据，启动滚动监听
                             this.busy = false;
                         } else {
                             // 第一次进入页面
@@ -106,13 +108,20 @@
                 console.log(1);
                 // 停止滚动监听
                 this.busy = true;
+                
                 //官方示例中延迟了1秒，防止滚动条滚动时的频繁请求数据
                 setTimeout(() => {
                     this.page++;
                     //     // 这里请求接口去拿数据，实际应该是调用一个请求数据的方法
                     this.getGoodsList(true);
                 }, 1000);
+            },
+            setPriceLevel(level){
+            //    console.log(level);
+               this.level = level;
+               this.getGoodsList();
             }
+            
         }
     }
 </script>

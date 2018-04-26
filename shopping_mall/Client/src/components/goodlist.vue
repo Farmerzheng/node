@@ -57,7 +57,7 @@
                 level:0
             }
         },
-        created() {
+        mounted() {
             this.getGoodsList();
         },
         methods: {

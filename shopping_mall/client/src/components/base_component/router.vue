@@ -1,8 +1,8 @@
 <template>
     <div class="router_wrap">
         <div class="router">
-            <span class="home">首页</span>/
-            <span class="my_cart">我的购物车</span>
+            <span class="home">首页/</span>
+            <slot name='secondary_routing'></slot>
         </div>
     </div>
 </template>

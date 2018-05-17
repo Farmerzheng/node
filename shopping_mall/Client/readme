@@ -1,3 +1,11 @@
+项目规范
+ 类名是中线还是下划线
+
+尤雨溪是Vue.js框架的作者
+尤雨溪毕业于上海复旦附中，在美国完成大学学业，本科毕业于Colgate University，后在Parsons设计学院获得Design & Technology艺术硕士学位，现任职于纽约Google Creative Lab。 [1] 
+2014年2月，开源了一个前端开发库Vue.js。Vue.js 是构建 Web 界面的 JavaScript 库，是一个通过简洁的API提供高效的数据绑定和灵活的组件系统。 [2-3] 
+2016年9月3日，在南京的JSConf上，Vue作者尤雨溪正式宣布加盟阿里巴巴Weex团队，尤雨溪称他将以技术顾问的身份加入 Weex 团队来做 Vue 和 Weex 的 JavaScript runtime 整合，目标是让大家能用 Vue 的语法跨三端
+
 npm install -g vue-cli
 
 vue init webpack mall(? Use ESLint to lint your code? (Y/n) n)
@@ -27,3 +35,128 @@ axios的用法
             console.log(res.data);
         });
     }
+
+vue 调试
+config文件夹下的index.js文件的devtool的设置更改为：
+devtool: '#cheap-module-eval-source-map',
+直接在浏览器中打断点就可以调试了   
+
+滚动到底部自动加载如何实现？
+1、监听滚动条距离窗口底部的距离（用到了scroll_bottom.js）
+2、滚动到底部的时候,this.page++，然后再次发送网络请求
+   注意：将原来的商品列表数组与新请求的商品列表数组合并
+
+懒加载的动态图如何实现？
+通过CSS3实现（load.css）  
+
+阻止a标签的默认行为
+<a href="javascript:void(0)" onclick="check()">点击我</a> 
+
+Vuex
+
+vue缓存
+
+vuex 中全局的方法
+
+const state = {
+    showLogin: false,
+    loginState: false,
+    username: '',
+    // 展示消息提示框的全局方法
+    showModel(message) {
+        this.$message({
+            message: message,
+            type: 'success'
+        });
+    }
+
+};
+
+export default state;
+
+vue 如何实现在函数中触发路由跳转
+
+this.$router.push({path:'/index'})
+
+slot 分发内容
+
+简单来说，假如父组件需要在子组件内放一些DOM，
+
+那么这些DOM是显示、不显示、在哪个地方显示、如何显示，就是slot分发负责的活。
+
+默认情况下，父组件在子组件内套的内容，是不显示的。
+
+父组件放在子组件里的内容，插到了子组件的<slot></slot>位置；
+
+父组件在要分发的标签里添加 slot=”name名” 属性
+
+子组件在对应分发的位置的slot标签里，添加name=”name名” 属性，
+
+然后就会将对应的标签放在对应的位置了。
+
+
+Vue 中的过滤器使用
+
+
+局部过滤器
+ export default {
+            data() {
+                return {
+                    cartList: []
+                }
+            },
+            filters:{
+            currency:currency
+            }
+        }
+<span>{{totalPrice|currency('￥')}}</span>
+--->
+总价 ￥5,654.00
+
+全局过滤器
+
+在main.js中导入currency.js
+
+
+Vue当中绑定类（当limit大于3的时候open类被绑定上去）
+:class="{'open':limit>3}"
+
+
+好好研究下面代码！
+点击盒子的时候让  checkIndex = index
+当 checkIndex ==  index 的时候绑定  active 类
+v-for 中的默认属性 index （item的索引）
+<div class="address_item"  v-for='(item,index) in addressListFilter' :class="{'active':checkIndex==index}" @click='checkIndex=index'>
+
+使用vscode，新建vue模板
+文件 --> 首选项 --> 用户代码片段  --> 输入vue，选择vue.json 
+复制以下代码到vue.json
+
+{
+    "Print to console": {
+        "prefix": "vue",
+        "body": [
+            "<template>",
+            "  <div class=\"page\">\n",
+            "  </div>",
+            "</template>\n",
+            "<script type=\"text/ecmascript-6\">",
+            "export default {",
+            "  data() {",
+            "    return {\n",
+            "    }",
+            "  },",
+            "  components: {\n",
+            "  }",
+            "}",
+            "</script>\n",
+            "<style scoped lang=\"stylus\">",
+            "</style>",
+            "$2"
+        ],
+        "description": "Log output to console"
+    }
+}
+
+测试方法： 新建vue后缀文件，输入vue，按下tab键，OK
+

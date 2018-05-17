@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动程序",
+            "program": "D:/H5/node/shopping_mall/server/bin/www"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "附加到端口",
+            "address": "localhost",
+            "port": 3000 // 和www文件端口保持一致
+        }
+        ]
+    }

@@ -8,19 +8,24 @@
 </template>
 
 <script>
-  import MallHeader from './base_component/mallheader' 
+  import MallHeader from './base_component/mallheader'
   import Router from './base_component/router'
   import GoodList from './goodlist'
-  import Foot from './base_component/footer.vue'
-  
+  import Foot from './base_component/footer'
+  import {
+    mapGetters
+  } from 'vuex';
   export default {
+    computed: {
+      ...mapGetters([
+        'showModel'
+      ])
+    },
     data() {
       return {}
     },
-    created() {
-    },
+    created() {},
     methods: {
-    
     },
     components: {
       MallHeader,

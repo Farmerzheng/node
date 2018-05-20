@@ -1,0 +1,34 @@
+1、安装mongodb
+yum install -y mongodb
+
+2、在 '/usr/local/mongodb' 目录下新建 mongodb.cfg
+mongodb.cfg的内容如下：
+
+dbpath=/usr/local/mongodb/data/db
+logpath=/usr/local/mongodb/data/log/mongodb.log
+logappend = true
+fork = true
+port = 27017
+
+3、在 '/usr/local/mongodb' 目录下新建 data 文件夹
+  data文件夹下新建  db和log文件夹
+  在log文件夹下新建 mongodb.log 文件
+
+
+4、配置mongodb的环境变量:
+
+ export PATH=$PATH:/usr/local/mongodb/bin/
+
+注意：'$PATH:' 后面为mongodb安装的bin目录
+
+5、启动mongodb:
+ mongod --config  /usr/local/mongodb/mongodb.cfg
+
+6、打开mongodb的命令行窗口:mongo 
+   在命令行窗口执行mongoDB的常用命令可进行测试
+
+7、利用可视化工具 Studio 3T 新建数据库 
+   并在新建的数据库当中导入集合
+   
+
+8、linux中将mongo作为系统服务启动

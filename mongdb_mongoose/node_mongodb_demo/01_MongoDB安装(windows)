@@ -1,30 +1,32 @@
 Windows 平台安装 MongoDB
 
-配置环境变量。这个是我的path：C:\Program Files\MongoDB\Server\3.2\bin
+配置环境变量（配置了环境变量，就可以直接使用mongodb当中的命令了）
+path：C:\Program Files\MongoDB\Server\3.2\bin
 
 
-1、下载安装
-2、配置存放日志和数据的目录
+1、下载安装mongdb
+
+2、配置存放‘日志’和‘数据’的目录
+
    在C:\Program Files\MongoDB\Server\3.2 目录下，创建一个mongodb.cfg 配置文件，文件内容如下：
 
     dbpath=D:\mongodb\data\db
     logpath=D:\mongodb\data\log\mongodb.log
-    auth=true
 
-    并且在d盘创建对应配置路径的文件夹
+    注意：在D盘创建对应配置路径的文件夹
 
 3、启动MongoDB服务器
 
-打开控制台cmd，进入mongodb安装目录/bin文件下运行命令：
+打开控制台cmd（先配置环境变量）
 
 mongod  --config  "C:\Program Files\MongoDB\Server\3.2\mongodb.cfg"
 
---config 选项表示启动时通过C:\Program Files\MongoDB\Server\3.2\mongodb.cfg 来启动
-
+--config 后面是启动配置文件
    
 
 4、测试一下是否配置正常
-     在 C:\Program Files\MongoDB\Server\3.2\bin目录下，运行mongo命令，测试一下连接
+
+     运行mongo命令，打开mongodb的命令行窗口
      如果命令出现如下提示说明链接正常：
 
      MongoDB shell version: 3.2.18-21-g97af1fa

@@ -1,0 +1,16 @@
+基于node命令运行的项目都是一次性
+断开主机连接后就不运行了
+这时候需要用到进程管理工具
+相关的工具有pm2，forever
+
+pm2
+
+安装pm2:
+npm install -g pm2
+
+使用pm2：
+pm2 start app.js
+
+监控进程列表：
+pm2 list
+

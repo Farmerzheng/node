@@ -1,3 +1,7 @@
+本地登陆主机服务器
+Mac系统使用iTerm登陆
+window系统使用putty登陆
+
 PuTTY是一个Telnet、SSH、rlogin、纯TCP以及串行接口连接软件。
 较早的版本仅支持Windows平台，
 在最近的版本中开始支持各类Unix平台，
@@ -66,6 +70,8 @@ root代表最高权限的根账户。输入之后回车（Enter）。
 可以看到上面配置的IP已经在列表中了，
 如果你要连接这个主机，双击就可以打开了。
 
+
+
 常见问题
 
 输入完 root 密码后，总是出现 Permission denied 错误字样？
@@ -87,7 +93,30 @@ BAD PASSWORD: The password is a palindrome
 Retype new password:
 passwd: all authentication tokens updated successfully.
 
+用 Putty v6.0 修改版，可保存登陆名和密码，实现自动登陆
 
+Putty 默认版只能保存登陆名，
+每次需输入登陆密码，
+主机和登陆名是保存在注册表中的。
+不过因为它是开源，
+所以有相关需求者做了个能同时保存用户和密码的版本
+，这些信息是保存在文件中的。
+该保存登陆名和密码版可在些下载：http://unmi.cc/wp-content/uploads/2010/06/putty_v6.0.rar
+
+设置起来特别好理解，
+默认版本也是这样子的。
+操作步骤全写在note_images/putty-保存密码.jpg
+
+阻止putty变成inactive
+
+
+Before saving a session, click on Connection in the left pane.
+Enter a number, in place of zero, in the text box.
+Ex: I use 60.
+Putty Connection
+Now, go back to Session and Save your session with the IP address.
+Putty Session
+This way, the session sends a keep-alive request to the server every 60 seconds. Hence, it stays active.
 
 
 

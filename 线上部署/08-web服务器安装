@@ -1,0 +1,113 @@
+
+
+安装APACHE服务器？
+
+1：安装APACHE
+
+安装命令：#yum install httpd
+
+2、安装完成后重新启动服务：#service httpd restart
+
+3、配置开机自启动：#chkconfig httpd on
+
+4、检查启动情况：#chkconfig --list httpd
+
+5、打开浏览器，输入（http://（你的主机ip地址）查看测试结果
+
+
+查看是否安装了apache服务 :  httpd -v  
+
+如何卸载apache?
+
+01.首先登陆你的SSH控制界面， 
+然后在其中输入查找一下跟httpd相关的软件包，
+运行命令：rpm -qa|grep httpd
+运行后所示，会显示出跟httpd相关的软件包：
+
+httpd-2.4.6-80.el7.centos.x86_64
+httpd-tools-2.4.6-80.el7.centos.x86_64
+
+02.
+接着开始使用centos下的卸载命令，
+ “rpm -e 软件或服务名”，
+ 我们运行：rpm -e httpd
+          rpm -e httpd-tools
+
+03.
+再次运行rpm -qa|grep http 
+查看是否有httpd相关软件包
+
+
+Linux下安装nginx
+
+nginx的一些模块依赖一些lib库，
+在安装nginx之前，
+须先安装这些lib库，
+依赖库主要有g++、gcc、openssl-devel、pcre-devel和zlib-devel 
+所以执行如下命令安装
+
+1.yum install gcc-c++  
+2.yum install pcre pcre-devel  
+3.yum install zlib zlib-devel  
+4.yum install openssl openssl-devel  
+
+1、首先http://nginx.org/en/download.html选择所需要下载在的版本，
+
+通过命令下载：
+
+ sudo wget  http://nginx.org/download/nginx-1.13.12.tar.gz
+
+2、新建目录
+
+sudo mkdir  /usr/local/nginx
+
+
+3、将ngnix移动至新建目录下：
+
+sudo mv nginx-1.13.12.tar.gz /usr/local/nginx/
+
+4、进入到新建的目录下，解压缩
+
+cd /usr/local/nginx
+
+sudo tar -zxvf nginx-1.13.12.tar.gz
+
+5、删除压缩文件
+
+rm -f nginx-1.13.12.tar.gz
+
+
+6、进入解压缩后的文件夹
+
+cd nginx-1.13.12
+
+7、执行命令
+
+sudo ./configure --prefix=/usr/local/nginx
+
+
+成功会显示如下代码：
+
+Configuration summary
+  + using system PCRE library
+  + OpenSSL library is not used
+  + using system zlib library
+
+  nginx path prefix: "/usr/local/nginx"
+  nginx binary file: "/usr/local/nginx/sbin/nginx"
+  nginx modules path: "/usr/local/nginx/modules"
+  nginx configuration prefix: "/usr/local/nginx/conf"
+  nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+  nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+  nginx error log file: "/usr/local/nginx/logs/error.log"
+  nginx http access log file: "/usr/local/nginx/logs/access.log"
+  nginx http client request body temporary files: "client_body_temp"
+  nginx http proxy temporary files: "proxy_temp"
+  nginx http fastcgi temporary files: "fastcgi_temp"
+  nginx http uwsgi temporary files: "uwsgi_temp"
+  nginx http scgi temporary files: "scgi_temp"
+
+
+
+
+

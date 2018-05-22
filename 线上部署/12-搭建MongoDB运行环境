@@ -27,7 +27,6 @@ port = 27017
   data文件夹下新建  db和log文件夹
   在log文件夹下新建 mongodb.log 文件
 
-
 4、配置mongodb的环境变量:
 
  export PATH=$PATH:/usr/local/mongodb/bin/
@@ -37,13 +36,14 @@ port = 27017
 5、启动mongodb:
  mongod --config  /usr/local/mongodb/mongodb.cfg
 
+ 打开浏览器测试：http://192.144.172.186:27017/
+
 6、打开mongodb的命令行窗口:mongo 
    在命令行窗口执行mongoDB的常用命令可进行测试
 
 7、利用可视化工具 Studio 3T 新建数据库 
    并在新建的数据库当中导入集合   
 
-8、安装mongoose
-   cnpm install mongoose
+
 
 

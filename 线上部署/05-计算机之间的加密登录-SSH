@@ -45,4 +45,4 @@ SSH客户端适用于多种平台。
  SSH有很多功能，它既可以代替Telnet，
  又可以为FTP、PoP、甚至为PPP提供一个安全的"通道"
 
- ssh配置文件ssh_config和sshd_config区别？
+

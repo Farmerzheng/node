@@ -1,0 +1,16 @@
+1、将服务器文件上传到linux的root/shopping_mall文件夹下
+
+  注意：修改routes路由下面的链接数据库的路径
+  将
+  mongoose.connect("mongodb://127.00.0.1:27017/my_db")
+  修改为
+  mongoose.connect("mongodb://192.144.172.186/shopping_mall")
+
+2、在linux 下运行上传的server文件
+
+   node server/bin/www
+
+3、在浏览器打开 http://192.144.172.186:3000/goods?page=1&perPage=6&sort=1&level=0  
+   
+  
+4、在linux上，通过pm2启动 server/bin/www

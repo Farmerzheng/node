@@ -1,0 +1,169 @@
+
+
+安装APACHE服务器？
+
+1：安装APACHE
+
+安装命令：#yum install httpd
+
+2、安装完成后重新启动服务：#service httpd restart
+
+3、配置开机自启动：#chkconfig httpd on
+
+4、检查启动情况：#chkconfig --list httpd
+
+5、打开浏览器，输入（http://（你的主机ip地址）查看测试结果
+
+
+查看是否安装了apache服务 :  httpd -v  
+
+如何卸载apache?
+
+01.首先登陆你的SSH控制界面， 
+然后在其中输入查找一下跟httpd相关的软件包，
+运行命令：rpm -qa|grep httpd
+运行后所示，会显示出跟httpd相关的软件包：
+
+httpd-2.4.6-80.el7.centos.x86_64
+httpd-tools-2.4.6-80.el7.centos.x86_64
+
+02.
+接着开始使用centos下的卸载命令，
+ “rpm -e 软件或服务名”，
+ 我们运行：rpm -e httpd
+          rpm -e httpd-tools
+
+03.
+再次运行rpm -qa|grep http 
+查看是否有httpd相关软件包
+
+
+Linux下安装nginx
+
+nginx的一些模块依赖一些lib库，
+在安装nginx之前，
+须先安装这些lib库，
+依赖库主要有g++、gcc、openssl-devel、pcre-devel和zlib-devel 
+所以执行如下命令安装
+
+1.yum install gcc-c++  
+2.yum install pcre pcre-devel  
+3.yum install zlib zlib-devel  
+4.yum install openssl openssl-devel  
+
+1、首先http://nginx.org/en/download.html选择所需要下载在的版本，
+
+通过命令下载：
+
+ sudo wget  http://nginx.org/download/nginx-1.13.12.tar.gz
+
+2、新建目录
+
+sudo mkdir  /usr/local/nginx
+
+
+3、将ngnix移动至新建目录下：
+
+sudo mv nginx-1.13.12.tar.gz /usr/local/nginx/
+
+4、进入到新建的目录下，解压缩
+
+cd /usr/local/nginx
+
+sudo tar -zxvf nginx-1.13.12.tar.gz
+
+5、删除压缩文件
+
+rm -f nginx-1.13.12.tar.gz
+
+
+6、进入解压缩后的文件夹
+
+cd nginx-1.13.12
+
+7、执行命令
+
+sudo ./configure --prefix=/usr/local/nginx
+
+
+成功会显示如下代码：
+
+Configuration summary
+  + using system PCRE library
+  + OpenSSL library is not used
+  + using system zlib library
+
+  nginx path prefix: "/usr/local/nginx"
+  nginx binary file: "/usr/local/nginx/sbin/nginx"
+  nginx modules path: "/usr/local/nginx/modules"
+  nginx configuration prefix: "/usr/local/nginx/conf"
+  nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+  nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+  nginx error log file: "/usr/local/nginx/logs/error.log"
+  nginx http access log file: "/usr/local/nginx/logs/access.log"
+  nginx http client request body temporary files: "client_body_temp"
+  nginx http proxy temporary files: "proxy_temp"
+  nginx http fastcgi temporary files: "fastcgi_temp"
+  nginx http uwsgi temporary files: "uwsgi_temp"
+  nginx http scgi temporary files: "scgi_temp"
+
+8、
+//执行make命令
+make
+//执行make install命令
+make install
+
+9、启动nginx
+
+ 启动代码格式： nginx安装目录地址  -c  nginx配置文件地址
+
+例如： /usr/local/nginx/sbin/nginx  -c  /usr/local/nginx/conf/nginx.conf
+
+10、打开浏览器测试是否启动成功
+
+  http://192.144.172.186/
+
+
+11、查看nginx进程号  : ps -ef|grep nginx
+
+12、项目文件存放路径：/usr/local/nginx/html
+　　创建文件夹放入就好。
+
+13、nginx服务器文件目录（/usr/local/nginx）
+
+logs:
+这个是nginx的日志文件。（★★★重要）。
+用于记录nginx的情况，
+如果nginx出错了。
+可以看这个文件的内容。
+从而解决nginx问题。
+进入logs目录之后会有两个重要的文件：
+其中access.log：这个文件记录着访问nginx服务器的所有记录。
+其中error.log：这个文件记录访问nginx服务器的所有的错误信息。
+如果出现错误了。就可以在这个文件中查看
+
+html：
+默认情况下，nginx会从这个查看是否有所需要的文件内容
+
+conf（★★★重要）
+这个是nginx的配置文件。
+里面就是nginx服务器的配置信息。
+其中一个重要的配置文件就是：
+nginx.conf（★★★重要）
+基本上nginx的所有配置都是在这个文件中进行的。
+
+nginx.conf主要信息：
+nginx有很多块组成，
+最外层是main，
+main包含Events和http，
+而http中包含upstream和多个server，
+而server中包含多个localhost。
+其中main：是全局设置
+server：主机设置，主要用于指定域名和端口号
+upstream：负载均衡服务器设置，设置一系列后端服务器
+localhost：URL匹配特定位置设置，匹配网页的路径
+
+
+
+
+

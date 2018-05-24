@@ -4,7 +4,9 @@ mongoose 是操作 MongoDB 的一个对象模型库；它封装了MongoDB对文�
 mongoose使用
 
 1、mongoose安装：npm install mongoose
+
 2、创建一个db.js
+
 3、运行db.js
 
 Schema：一种以文件形式存储的数据库模型，不具备数据库的操作能力

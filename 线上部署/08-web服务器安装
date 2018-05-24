@@ -107,62 +107,6 @@ Configuration summary
   nginx http uwsgi temporary files: "uwsgi_temp"
   nginx http scgi temporary files: "scgi_temp"
 
-8、
-//执行make命令
-make
-//执行make install命令
-make install
-
-9、启动nginx
-
- 启动代码格式： nginx安装目录地址  -c  nginx配置文件地址
-
-例如： /usr/local/nginx/sbin/nginx  -c  /usr/local/nginx/conf/nginx.conf
-
-10、打开浏览器测试是否启动成功
-
-  http://192.144.172.186/
-
-
-11、查看nginx进程号  : ps -ef|grep nginx
-
-12、项目文件存放路径：/usr/local/nginx/html
-　　创建文件夹放入就好。
-
-13、nginx服务器文件目录（/usr/local/nginx）
-
-logs:
-这个是nginx的日志文件。（★★★重要）。
-用于记录nginx的情况，
-如果nginx出错了。
-可以看这个文件的内容。
-从而解决nginx问题。
-进入logs目录之后会有两个重要的文件：
-其中access.log：这个文件记录着访问nginx服务器的所有记录。
-其中error.log：这个文件记录访问nginx服务器的所有的错误信息。
-如果出现错误了。就可以在这个文件中查看
-
-html：
-默认情况下，nginx会从这个查看是否有所需要的文件内容
-
-conf（★★★重要）
-这个是nginx的配置文件。
-里面就是nginx服务器的配置信息。
-其中一个重要的配置文件就是：
-nginx.conf（★★★重要）
-基本上nginx的所有配置都是在这个文件中进行的。
-
-nginx.conf主要信息：
-nginx有很多块组成，
-最外层是main，
-main包含Events和http，
-而http中包含upstream和多个server，
-而server中包含多个localhost。
-其中main：是全局设置
-server：主机设置，主要用于指定域名和端口号
-upstream：负载均衡服务器设置，设置一系列后端服务器
-localhost：URL匹配特定位置设置，匹配网页的路径
-
 
 
 

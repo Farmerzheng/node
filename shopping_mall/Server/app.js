@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 登录拦截
 app.use(function(req, res, next) {
-
+    console.log(req)
     if (req.cookies.userId ||
         req.path == '/goods' ||
         req.originalUrl.indexOf('/login') != -1 ||
